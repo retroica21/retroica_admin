@@ -182,6 +182,8 @@ export async function importProductsFromExcel(
 
 /**
  * Generate a unique SKU from brand, model, and section
+ * This is deterministic - same brand+model+section = same SKU
+ * This prevents duplicate products when re-importing the same Excel file
  */
 function generateSKU(brand: string, model: string, section: string): string {
   const brandCode = brand
@@ -193,9 +195,18 @@ function generateSKU(brand: string, model: string, section: string): string {
     .toUpperCase()
     .replace(/[^A-Z0-9]/g, "")
   const sectionCode = section.toUpperCase()
-  const timestamp = Date.now().toString().slice(-6)
 
-  return `${brandCode}-${modelCode}-${sectionCode}-${timestamp}`
+  // Create a simple hash from the full brand+model+section to ensure uniqueness
+  const hashInput = `${brand}-${model}-${section}`.toLowerCase()
+  let hash = 0
+  for (let i = 0; i < hashInput.length; i++) {
+    const char = hashInput.charCodeAt(i)
+    hash = (hash << 5) - hash + char
+    hash = hash & hash // Convert to 32-bit integer
+  }
+  const hashCode = Math.abs(hash).toString(36).substring(0, 6).toUpperCase()
+
+  return `${brandCode}-${modelCode}-${sectionCode}-${hashCode}`
 }
 
 /**
