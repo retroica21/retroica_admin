@@ -4,8 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Mail, Package, DollarSign, Calendar } from "lucide-react"
 
-export const dynamic = "force-dynamic"
-
 export default async function AdminSellersPage() {
   await requireAdmin()
   const supabase = await createClient()

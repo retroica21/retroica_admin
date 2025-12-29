@@ -1,13 +1,9 @@
-"use client"
-
 import { requireAdmin } from "@/lib/auth/rbac"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Package, ExternalLink } from "lucide-react"
 import { ProductFilters } from "@/components/admin/product-filters"
-
-export const dynamic = "force-dynamic"
 
 interface SearchParams {
   brand?: string

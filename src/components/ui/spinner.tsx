@@ -1,21 +1,16 @@
-import { cn } from "@/lib/utils"
+import { Loader2Icon } from 'lucide-react'
 
-interface SpinnerProps {
-  className?: string
-}
+import { cn } from '@/lib/utils'
 
-export function Spinner({ className }: SpinnerProps) {
+function Spinner({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
-    <div
-      className={cn(
-        "inline-block animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]",
-        className,
-      )}
+    <Loader2Icon
       role="status"
-    >
-      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-        Loading...
-      </span>
-    </div>
+      aria-label="Loading"
+      className={cn('size-4 animate-spin', className)}
+      {...props}
+    />
   )
 }
+
+export { Spinner }

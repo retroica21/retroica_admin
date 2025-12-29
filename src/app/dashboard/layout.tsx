@@ -3,8 +3,6 @@ import { requireAuth } from "@/lib/auth/rbac"
 import { DashboardNav } from "@/components/layout/dashboard-nav"
 import { DashboardHeader } from "@/components/layout/dashboard-header"
 
-export const dynamic = "force-dynamic"
-
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   await requireAuth()
 

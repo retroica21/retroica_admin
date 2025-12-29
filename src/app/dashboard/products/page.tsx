@@ -1,5 +1,3 @@
-"use client"
-
 import { requireAuth } from "@/lib/auth/rbac"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,8 +5,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Package, Plus, ExternalLink } from "lucide-react"
 import Link from "next/link"
-
-export const dynamic = "force-dynamic"
 
 export default async function ProductsPage() {
   const { profile } = await requireAuth()
